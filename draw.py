@@ -1,14 +1,19 @@
 from display import *
 from matrix import *
-
+import math
 
 def add_circle( points, cx, cy, cz, r, step ):
-    pass
+    t = 0
+    stop = 1.001
+    while (t <= stop):
+        x = cx + r*math.cos(t)
+        y = cy + r*math.sin(t)
+        add_point(points, x, y)
+        t+= step
+    print_matrix(points)
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     pass
-
-
 
 def draw_lines( matrix, screen, color ):
     if len(matrix) < 2:

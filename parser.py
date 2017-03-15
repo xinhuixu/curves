@@ -83,6 +83,9 @@ def parse_file( fname, edges, transform, screen, color ):
                 t = make_rotZ(theta)
             matrix_mult(t, transform)
                 
+        elif line = 'circle':
+            print 'CIRCLE'
+
         elif line == 'ident':
             ident(transform)
 
