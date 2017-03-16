@@ -30,11 +30,9 @@ def make_hermite():
     #print_matrix(t)
     return t
 
-def generate_curve_coefs( p1, p2, p3, p4, t ):
-    I = [[p1, p2, p3, p4]]
-    matrix_mult(t, I)
-    #print_matrix(I)
-    return I
+def generate_curve_coefs( inp, t ):
+    matrix_mult(t, inp)
+    return inp
 
 def make_translate( x, y, z ):
     t = new_matrix()
