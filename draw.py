@@ -4,13 +4,16 @@ import math
 
 def add_circle( points, cx, cy, cz, r, step ):
     t = 0
-    stop = 1.001
+    stop = 2 * math.pi
+    x = cx + r*math.cos(t)
+    y = cy + r*math.sin(t)
     while (t <= stop):
-        x = cx + r*math.cos(t)
-        y = cy + r*math.sin(t)
-        add_point(points, x, y)
         t+= step
-    print_matrix(points)
+        cur_x = cx + r*math.cos(t)
+        cur_y = cy + r*math.sin(t)
+        add_edge(points, x, y, 0, cur_x, cur_y, 0)
+        x = cur_x
+        y = cur_y
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     pass
