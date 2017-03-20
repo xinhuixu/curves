@@ -16,18 +16,26 @@ def add_circle( points, cx, cy, cz, r, step ):
         y = cur_y
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    inp = []
-    add_point(inp, x0, y0)
-    add_point(inp, x1, y1)
-    add_point(inp, x2, y2)
-    add_point(inp, x3, y3)
-    if curve_type == "hermite":
-        print "hermite"
-        generate_curve_coefs(inp, T
-    elif curve_type == "bezier":
-        print "bezier"
+    t = 0
+    stop = 1.001
+
+    if curve_type == 'hermite' or curve_type =='bezier':
+        cx = generate_curve_coefs(x0, x1, x2, x3, curve_type)
+        cy = generate_curve_coefs(y0, y1, y2, y3, curve_type)            
     else:
-        print "INVALID CURVE TYPE"
+        print "INVALID TYPE"
+        exit
+
+    x = cx[0]*(t**3) + cx[1]*(t**2) + cx[2]*t + cx[3]
+    y = cy[0]*(t**3) + cy[1]*(t**2) + cy[2]*t + cy[3]
+    while (t <= stop):
+        t+= step
+        cur_x = cx[0]*(t**3) + cx[1]*(t**2) + cx[2]*t + cx[3]
+        cur_y = cy[0]*(t**3) + cy[1]*(t**2) + cy[2]*t + cy[3]
+        add_edge(points, x, y, 0, cur_x, cur_y, 0)
+        x = cur_x
+        y = cur_y
+        
 
 def draw_lines( matrix, screen, color ):
     if len(matrix) < 2:

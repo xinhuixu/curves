@@ -10,9 +10,9 @@ def make_bezier():
     t[1][1] = -6
     t[1][2] = 3
     t[2][0] = -3
-    t[2][1] = -3
+    t[2][1] = 3
     t[3][0] = 1
-    #print_matrix(t)
+    print_matrix(t)
     return t
 
 def make_hermite():
@@ -27,12 +27,22 @@ def make_hermite():
     t[2][2] = 1
     t[3][0] = 1
     t[3][1] = -1
-    #print_matrix(t)
+    print_matrix(t)
     return t
 
-def generate_curve_coefs( inp, t ):
-    matrix_mult(t, inp)
-    return inp
+def generate_curve_coefs( p1, p2, p3, p4, typ ):
+    ret = new_matrix()
+    ret[0] = [p1, p2, p3, p4]
+    if typ == "hermite":
+        h = make_hermite()
+        matrix_mult(h, ret)
+    elif typ == "bezier":
+        b = make_bezier()
+        matrix_mult(b, ret)
+    else:
+        print "type error"
+    print ret[0]
+    return ret[0]
 
 def make_translate( x, y, z ):
     t = new_matrix()
